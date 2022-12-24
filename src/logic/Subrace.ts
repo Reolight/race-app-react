@@ -1,5 +1,5 @@
 import IComplexParam from "./ComplexParameter"
-import { parameter } from "./parameter"
+import { parameter, parameter_definition } from "./parameter"
 
 export default class Subrace{
     NAME: string = ""
@@ -176,9 +176,21 @@ export default class Subrace{
         }
     ]
 
-    constructor(){
-        this.COMPLEX.forEach(complex => {
-            complex.derivate = this.PARAMETERS.find(param => param.name === complex.derivate_name)
-        })
+    /**
+     * Constructor for creation of subrace instance with 
+     * defined 'expected values' or without (for user input)
+     */
+    constructor (
+        SUBRACE_NAME: string,
+        expected_values?: parameter_definition[]
+    )
+    {
+        this.NAME = SUBRACE_NAME
+        if (expected_values){
+            expected_values.forEach(ev => {
+                const param = this.PARAMETERS.find(par => par.name === ev.name)
+                if (param) param.expected_vals = ev.expected_value
+            })
+        }
     }
 }

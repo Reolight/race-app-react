@@ -10,3 +10,8 @@ export type parameter = {
     image?: string
     clue?: string
 }
+
+export type parameter_definition = {
+    name: string
+    expected_value: number[]
+}

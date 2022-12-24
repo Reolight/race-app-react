@@ -5,7 +5,6 @@ export default interface IComplexParam{
     param2: parameter
 
     derivate_name: string
-    derivate?: parameter
 
     produceDerivate(): number
 }

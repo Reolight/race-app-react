@@ -3,41 +3,50 @@ import { parameter } from "../logic/parameter";
 import Subrace from "../logic/Subrace";
 import Parameter from "./Parameter";
 
-const regex = new RegExp('[0-9]')
-
 export default function Charter(): JSX.Element {
     const [chart, setChart] = useState<Subrace>()
     useEffect(() => {
-        if (!chart) setChart(new Subrace())
+        if (!chart) setChart(new Subrace('USER_INPUT'))
         else console.log(chart)
     }, [chart])
     
-    function call_balck(param: parameter, value: number){
-        let c = chart
-        if (regex.test(`${value}`)){
-            param.value = value
-            setChart(c)
-        }
+    function call_back(param: parameter, e: number){
+        setChart((prevState) => {
+            if (prevState){
+                const simplex = prevState!.PARAMETERS.find(p => p === param) as parameter
+                console.debug(`simplex is: `, simplex, `will receive ${e}`)
+                if (simplex) param.value = e;
+            }
+
+            console.debug(prevState)
+            return prevState
+        })
     }
 
     function complex_back(param: parameter, value: number){
         if (!chart) return
-        let ch = chart
-        const complex = chart.COMPLEX.find(c => c.param1 === param || c.param2 === param)
-        if (!complex) { 
-            console.error(`Complex param not found... param name: ${param.name}`); 
-            return
-        }
+        setChart(prevChart => {
+            const complex = prevChart!.COMPLEX.find(c => c.param1 === param || c.param2 === param)
+            const simplex = complex?.param1 === param ? complex.param1 : complex?.param2
+            if (!complex || !simplex) { 
+                console.error(`Complex param not found... param name: ${param.name}`); 
+                return
+            }
+            
+            simplex.value = value
+            if (complex.param1 && complex.param2){
+                const derivate = prevChart!.PARAMETERS.find(par => par.name === complex.derivate_name && par.is_complex)
+                if (derivate){
+                    derivate.value = complex.produceDerivate()
+                } else console.error(`Derivate parameter haven't been found (name: ${complex.derivate_name})`)
+            }
 
-        param.value = value
-        if (complex.param1 && complex.param2 && complex.derivate){
-            complex.derivate.value = complex.produceDerivate()
-        }
-
-        setChart(ch)
+            console.debug(prevChart)
+            return prevChart
+        })
     }
 
-    return (<div className="Panel" style={{ minWidth: 250 }}>
+    return (<div className="Panel" style={{ minWidth: 250 }} key={'charter'}>
         {chart && chart.PARAMETERS.map(param => 
             {return param.is_complex? 
                 <>
@@ -54,14 +63,14 @@ export default function Charter(): JSX.Element {
                     <Parameter
                         key={param.name}
                         param_input={param}
-                        callback={call_balck} 
+                        callback={call_back} 
                     />
                     <hr />
                 </>
                 : <Parameter 
                     key={param.name}
                     param_input={param}
-                    callback={call_balck} 
+                    callback={call_back} 
                 />
             }
         )}

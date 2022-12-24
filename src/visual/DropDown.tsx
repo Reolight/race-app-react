@@ -4,6 +4,7 @@ interface DropDownProps{
     values: string[]
     filter?: string;
     valueSelection: Function
+    returnNumber?: boolean
 }
 
 export default function DropDown(props: DropDownProps): JSX.Element{
@@ -14,14 +15,25 @@ export default function DropDown(props: DropDownProps): JSX.Element{
         return props.values.filter(value => regex.test(value))
     }
 
+    function onSelected(value: string){
+        if (props.returnNumber){
+            const index = props.values.findIndex(v => v === value)
+            console.debug(`returned from DD ${index}`)
+            props.valueSelection(index)
+            return
+        }
+        
+        props.valueSelection(value)
+    }
+
     return(<> {props.values.length > 0 &&
-        <div className={"dropdown"}>
+        <div className={"dropdown"} style={{top: 64, left: 0}}>
             {arrayDislay().map(
                 (value, index): JSX.Element => {
                     return(
                         <div
-                            key={index}
-                            onClick={()=>props.valueSelection(value)}
+                            key={value+index}
+                            onClick={()=>onSelected(value)}
                         >
                             {value}
                         </div>
