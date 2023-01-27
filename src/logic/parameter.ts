@@ -1,6 +1,8 @@
+import IParam from "./IParam"
+
 export type parameter_type = 'spinnable' | 'number'
 
-export type parameter = {
+export default interface parameter extends IParam {
     name: string
     type: parameter_type
     is_complex?: boolean
@@ -9,9 +11,4 @@ export type parameter = {
     values?: string[]
     image?: string
     clue?: string
-}
-
-export type parameter_definition = {
-    name: string
-    expected_value: number[]
 }
