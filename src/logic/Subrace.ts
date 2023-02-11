@@ -190,7 +190,9 @@ export default class Subrace{
             ID: 16,
             name: 'Цвет волос',
             type: 'spinnable',
+                    //0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
             values: ['A','B','C','D','E','F','G','H','I','K','L','M','N','O','P','Q',
+                      //16  17  18  19  20  21  22  23  24   25   26    27  28   29
                         'R','S','T','U','V','W','X','Y','i','ii','iii','iv','v','vi']
         },
         
