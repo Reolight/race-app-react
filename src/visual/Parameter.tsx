@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { parameter } from "../logic/parameter";
+import parameter from "../logic/parameter";
 import DropDown from "./DropDown";
 
 interface param_comp {

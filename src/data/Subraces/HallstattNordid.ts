@@ -1,7 +1,7 @@
 import IParam from "../../logic/IParam";
 import Subrace from "../../logic/Subrace";
 
-const scando_nordid : Subrace = new Subrace( 
+export const scando_nordid : Subrace = new Subrace( 
     "Скандидо-нордид",
     [
         {ID: 0, expected_values: []},

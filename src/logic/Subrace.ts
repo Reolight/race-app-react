@@ -101,7 +101,7 @@ export default class Subrace{
     
     PARAMETERS: parameter[] = [
         {
-            ID: 4,
+            ID: 0,
             name: "Головной индекс",
             type:'spinnable',
             is_complex: true,
@@ -109,7 +109,7 @@ export default class Subrace{
         },
 
         {
-            ID: 5,
+            ID: 1,
             name: 'Лицевой индекс',
             type:'spinnable',
             is_complex: true,
@@ -117,7 +117,7 @@ export default class Subrace{
         },
 
         {
-            ID: 6,
+            ID: 2,
             name: 'Носовой индекс',
             type:'spinnable',
             is_complex: true,
@@ -125,7 +125,7 @@ export default class Subrace{
         },
 
         {
-            ID: 7,
+            ID: 3,
             name: `Высота лба`, 
             type: "spinnable",
             is_complex: true,
@@ -133,7 +133,7 @@ export default class Subrace{
         },
 
         {
-            ID: 8,
+            ID: 4,
             name: 'Форма носа', 
             type:'spinnable',
             is_complex: false,
@@ -141,7 +141,7 @@ export default class Subrace{
         },
 
         {
-            ID: 9,
+            ID: 5,
             name: 'Форма лба',
             type: 'spinnable',
             is_complex: false,
@@ -149,14 +149,14 @@ export default class Subrace{
         },
         
         {
-            ID: 10,
+            ID: 6,
             name: 'Выпуклость затылка',
             type: 'spinnable',
             values: ['Плоский', 'Слабо выпуклый', 'Выпуклый']
         },
         
         {
-            ID: 11,
+            ID: 7,
             name: 'Форма глаз', 
             type: 'spinnable',
             values: ['Внутренние углы выше наружных',
@@ -164,30 +164,30 @@ export default class Subrace{
         },
         
         {
-            ID: 12,
+            ID: 8,
             name: 'Ширина скул',
             type: 'spinnable', 
             values: ['Узкие', 'Средние', 'Средние']
         },
 
         {
-            ID: 13,
+            ID: 9,
             name: "Ширина челюсти",
             type: 'spinnable',
             values: ['Узкая', 'Средняя', 'Широкая']
         },
 
         {
-            ID: 14,
+            ID: 10,
             name: 'Цвет кожи',
             type: 'spinnable',
             values: ['Светлая', 'Светло-смуглая', 'Смуглая']
         },
 
-        {ID: 15, name: 'Цвет глаз', type:'number'},
+        {ID: 11, name: 'Цвет глаз', type:'number'},
         
         {
-            ID: 16,
+            ID: 12,
             name: 'Цвет волос',
             type: 'spinnable',
                     //0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
@@ -197,7 +197,7 @@ export default class Subrace{
         },
         
         {
-            ID: 17,
+            ID: 13,
             name: 'Тип волос',
             type: 'spinnable',
             values: ['Прямые', 'Волнистые', 'Вьющиеся']

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { parameter } from "../logic/parameter";
+import parameter from "../logic/parameter";
 import Subrace from "../logic/Subrace";
 import Parameter from "./Parameter";
 
