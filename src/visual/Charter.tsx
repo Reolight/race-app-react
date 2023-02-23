@@ -4,7 +4,7 @@ import IParameter from "../logic/IParameter";
 import Subrace from "../logic/Subrace";
 import Parameter from "./Parameter";
 
-export default function Charter(): JSX.Element {
+export default function Charter(props: {returnEdited: Function}): JSX.Element {
     const [chart, setChart] = useState<Subrace>()
     useEffect(() => {
         if (!chart) setChart(new Subrace('USER_INPUT'))
@@ -72,5 +72,6 @@ export default function Charter(): JSX.Element {
                 />
             }
         )}
+        <button onClick={() => props.returnEdited(chart)}>Done</button>
     </div>)
 }
