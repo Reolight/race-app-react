@@ -4,10 +4,14 @@ import IParameter from "../logic/IParameter";
 import Subrace from "../logic/Subrace";
 import Parameter from "./Parameter";
 
-export default function Charter(props: {returnEdited: Function}): JSX.Element {
+export default function Charter(props: {returnEdited: Function, editedSubrace?: Subrace}): JSX.Element {
     const [chart, setChart] = useState<Subrace>()
     useEffect(() => {
-        if (!chart) setChart(new Subrace('USER_INPUT'))
+        if (!chart) 
+            setChart(props.editedSubrace === undefined? 
+                new Subrace('USER_INPUT'): 
+                props.editedSubrace
+            )
         else console.log(chart)
     }, [chart])
     

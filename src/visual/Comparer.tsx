@@ -9,6 +9,7 @@ import SubraceViewer from "./Comparer/SubraceViewer";
 
 const data : Subrace[] = GetData()
 let comparedList : ICompared[]
+let subraceForEdit : Subrace | undefined;
 
 export default function Comparer() {
     const [givenSubrace, setGivenSubrace] = useState<Subrace | undefined>()
@@ -23,13 +24,22 @@ export default function Comparer() {
         setChoosenName(nameOfSelected)
     }
 
+    function EditSubrace(){
+        subraceForEdit = givenSubrace;
+        setGivenSubrace(undefined)
+    }
     
     return(
-        givenSubrace === undefined? <Charter returnEdited={SubraceEditFinished}/> :
+        givenSubrace === undefined? 
+            <Charter 
+                returnEdited={SubraceEditFinished}
+                editedSubrace={subraceForEdit}
+            /> :
         <>
             <SubraceViewer 
                 key={"SubraceViewer"}
                 editedSubrace={givenSubrace}
+                editSubraceCallback={EditSubrace}
                 definedSubrace={
                     comparedList.find(item => item.subraceOrigin.NAME === choosenName)?.subraceOrigin
                 }

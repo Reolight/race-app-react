@@ -3,6 +3,7 @@ import Subrace from "../../logic/Subrace"
 interface subraceViewerProps{
     editedSubrace: Subrace
     definedSubrace?: Subrace
+    editSubraceCallback: Function
 }
 
 export default function SubraceViewer(props: subraceViewerProps): JSX.Element {
@@ -15,6 +16,7 @@ export default function SubraceViewer(props: subraceViewerProps): JSX.Element {
                         parameter.value === undefined? "не установлен" : parameter.value
                     return <p><label>{parameter.name}: {value}</label></p>
                 })}
+                <button onClick={() => props.editSubraceCallback()} >Редактировать</button>
             </div>
         )
     }
