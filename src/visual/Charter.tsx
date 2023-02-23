@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import parameter from "../logic/parameter";
+import IComplexParam from "../logic/IComplexParam";
+import IParameter from "../logic/IParameter";
 import Subrace from "../logic/Subrace";
 import Parameter from "./Parameter";
 
@@ -10,10 +11,10 @@ export default function Charter(): JSX.Element {
         else console.log(chart)
     }, [chart])
     
-    function call_back(param: parameter, e: number){
+    function call_back(param: IParameter, e: number){
         setChart((prevState) => {
             if (prevState){
-                const simplex = prevState!.PARAMETERS.find(p => p === param) as parameter
+                const simplex = prevState!.PARAMETERS.find(p => p === param) as IParameter
                 console.debug(`simplex is: `, simplex, `will receive ${e}`)
                 if (simplex) param.value = e;
             }
@@ -23,23 +24,20 @@ export default function Charter(): JSX.Element {
         })
     }
 
-    function complex_back(param: parameter, value: number){
+    function complex_back(param: IParameter, value: number){
         if (!chart) return
         setChart(prevChart => {
-            const complex = prevChart!.COMPLEX.find(c => c.param1 === param || c.param2 === param)
-            const simplex = complex?.param1 === param ? complex.param1 : complex?.param2
-            if (!complex || !simplex) { 
-                console.error(`Complex param not found... param name: ${param.name}`); 
-                return
-            }
+            param.value = value;
+            const complex = prevChart!.PARAMETERS.find(c => 
+                c.is_complex && 
+                ((c as IComplexParam).paramId1 === param || (c as IComplexParam).paramId2 === param)
+            ) as IComplexParam
             
-            simplex.value = value
-            if (complex.param1 && complex.param2){
-                const derivate = prevChart!.PARAMETERS.find(par => par.name === complex.derivate_name && par.is_complex)
-                if (derivate){
-                    derivate.value = complex.produceDerivate()
-                } else console.error(`Derivate parameter haven't been found (name: ${complex.derivate_name})`)
-            }
+            console.log("value: " + param.value, param, complex)
+            if (complex.paramId1.value && complex.paramId2.value){
+                complex.produceDerivate();
+                console.log("produced val of " + complex.name + " is " + complex.value)
+            } 
 
             console.debug(prevChart)
             return prevChart
@@ -51,24 +49,24 @@ export default function Charter(): JSX.Element {
             {return param.is_complex? 
                 <>
                     <Parameter 
-                        key={param.name + "1"}
-                        param_input={chart.COMPLEX.find(complex => complex.derivate_name === param.name)?.param1}
+                        key={param.ID}
+                        param_input={(param as IComplexParam).paramId1}
                         callback={complex_back}
                     />
                     <Parameter 
-                        key={param.name + "2"}
-                        param_input={chart.COMPLEX.find(complex => complex.derivate_name === param.name)?.param2}
+                        key={param.ID}
+                        param_input={(param as IComplexParam).paramId2}
                         callback={complex_back}
                     />
                     <Parameter
-                        key={param.name}
+                        key={param.ID}
                         param_input={param}
                         callback={call_back} 
                     />
                     <hr />
                 </>
                 : <Parameter 
-                    key={param.name}
+                    key={param.ID}
                     param_input={param}
                     callback={call_back} 
                 />

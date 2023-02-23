@@ -1,136 +1,123 @@
-import IComplexParam from "./ComplexParameter"
-import IParam from "./IParam"
-import parameter from "./parameter"
+import IComplexParam from "./IComplexParam"
+import IParameterDefinition from "./IParameterDefinition"
+import IParameter from "./IParameter"
 
 export default class Subrace{
     NAME: string = ""
-    COMPLEX: IComplexParam[] = [
+        
+    PARAMETERS: IParameter[] = [
         {
-            ID: 0,
-            derivate_name: 'Носовой индекс',
-            param1 : {
-                ID: 18,
-                name: "Длина носа",
-                type: 'number'
-            },
-            param2 : {
-                ID: 19,
-                name: "Ширина носа",
-                type: 'number'
-            },
+            ID: 0,            
+            name: "Головной индекс",
+            type:'spinnable',
+            is_complex: true,
+            values: ["Долихоцефалия", "Мезоцефалия", "Брахицефалия"],
 
-            produceDerivate(): number {
-                if (!this.param1.value && !this.param2.value) return -1
-                const coeff = this.param2.value! / this.param1.value!
-
-                if (coeff < 0.70) return 0
-                else return coeff <= 0.849? 1 : 2
-            }
-        },
-
-        {
-            ID: 1,
-            derivate_name: "Головной индекс",
-            param1 : {
+            paramId1 : {
                 ID: 20,
                 name: "Ширина черепа",
                 type: 'number'
             },
-            param2 : {
+            paramId2 : {
                 ID: 21,
                 name: "Длина лица",
                 type: "number"
             },
 
-            produceDerivate(): number{
-                if (!this.param1.value && !this.param2.value) return -1
-                const coeff = this.param1.value! / this.param2.value!
-
-                if (coeff < 0.77) return 0
-                else return coeff <= 0.809? 1 : 2
+            produceDerivate() {
+                const coeff = this.paramId1.value! / this.paramId2.value!
+                console.log(this, coeff)
+                if (coeff < 0.77) 
+                    this.value = 0
+                else 
+                    this.value = coeff <= 0.809? 1 : 2
             }
-        },
-
-        {
-            ID: 2,
-            derivate_name: 'Лицевой индекс',
-            param1: {
-                ID: 22,
-                name: "Высота лица 1*",
-                type: 'number',
-                clue: 'Высота лица от подбородка до глабеллы'
-            },
-            param2: {
-                ID: 23,
-                name: 'Ширина лица',
-                type: 'number',
-            },
-
-            produceDerivate(): number{
-                if (!this.param1.value && !this.param2.value) return -1
-                const coeff = this.param1.value! / this.param2.value!
-
-                if (coeff > 0.88) return 0
-                else return coeff >= 0.84 ? 1 : 2
-            }
-        },
-
-        {
-            ID: 3,
-            derivate_name: `Высота лба`, 
-            param1: {
-                ID: 24,
-                name: 'Высота лба',
-                type: "number",
-            },
-            param2: {
-                ID: 25,
-                name: 'Высота лица 2',
-                type: "number",
-                clue: "Высота лица от подбородка до волос"
-            },
-
-            produceDerivate(): number{
-                if (!this.param1.value && !this.param2.value) return -1
-
-                if (this.param1.value! > this.param2.value! / 3 * 1.05) return 0
-                else return this.param1.value! > this.param2.value! / 3 * 0.95 ? 1 : 2
-            }
-        }
-    ]
-    
-    PARAMETERS: parameter[] = [
-        {
-            ID: 0,
-            name: "Головной индекс",
-            type:'spinnable',
-            is_complex: true,
-            values: ["Долихоцефалия", "Мезоцефалия", "Брахицефалия"]
-        },
+        } as IComplexParam,
 
         {
             ID: 1,
             name: 'Лицевой индекс',
             type:'spinnable',
             is_complex: true,
-            values: ["Лептопросопия", "Мезопросопия", "Юрипросопия"]
-        },
+            values: ["Лептопросопия", "Мезопросопия", "Юрипросопия"],
+            paramId1: {
+                ID: 22,
+                name: "Высота лица 1*",
+                type: 'number',
+                clue: 'Высота лица от подбородка до глабеллы'
+            },
+            paramId2: {
+                ID: 23,
+                name: 'Ширина лица',
+                type: 'number',
+            },
+
+            produceDerivate() {
+                if (!this.paramId1.value && !this.paramId2.value) return -1
+                const coeff = this.paramId1.value! / this.paramId2.value!
+                console.log(this, coeff)
+                if (coeff > 0.88)
+                    this.value = 0
+                else
+                    this.value = coeff >= 0.84 ? 1 : 2
+            }
+        } as IComplexParam,
 
         {
             ID: 2,
             name: 'Носовой индекс',
             type:'spinnable',
             is_complex: true,
-            values: ["Лепториния", "Мезориния", "Хамэриния"]
-        },
+            values: ["Лепториния", "Мезориния", "Хамэриния"],
+
+            paramId1 : {
+                ID: 18,
+                name: "Длина носа",
+                type: 'number'
+            },
+            paramId2 : {
+                ID: 19,
+                name: "Ширина носа",
+                type: 'number'
+            },
+
+            produceDerivate() {
+                if (!this.paramId1.value && !this.paramId2.value) return -1
+                const coeff = this.paramId2.value! / this.paramId1.value!
+                console.log(this, coeff)
+                if (coeff < 0.70) 
+                    this.value = 0
+                else 
+                    this.value = coeff <= 0.849? 1 : 2
+            }
+        } as IComplexParam,
 
         {
             ID: 3,
             name: `Высота лба`, 
             type: "spinnable",
             is_complex: true,
-            values: ["Высокий", "Средний", "Низкий"]
-        },
+            values: ["Высокий", "Средний", "Низкий"],
+            paramId1: {
+                ID: 24,
+                name: 'Высота лба',
+                type: "number",
+            },
+            paramId2: {
+                ID: 25,
+                name: 'Высота лица 2',
+                type: "number",
+                clue: "Высота лица от подбородка до волос"
+            },
+
+            produceDerivate() {
+                console.log(this)
+                if (this.paramId1.value! > this.paramId2.value! / 3 * 1.05) 
+                    this.value = 0
+                else
+                    this.value = this.paramId1.value! > this.paramId2.value! / 3 * 0.95 ? 1 : 2
+            }
+        } as IComplexParam,
 
         {
             ID: 4,
@@ -210,18 +197,14 @@ export default class Subrace{
      */
     constructor (
         SUBRACE_NAME: string,
-        expected_values?: IParam[]
+        expected_values?: IParameterDefinition[]
     )
     {
         this.NAME = SUBRACE_NAME
         if (expected_values){
             expected_values.forEach(ev => {
-                let param : IParam | undefined = this.PARAMETERS.find(par => par.ID === ev.ID)
-                if (!param) {
-                    param = this.COMPLEX.find(comp => comp.ID == ev.ID) as IParam;
-                }
-                
-                param.expected_values = ev.expected_values
+                let param : IParameterDefinition | undefined = this.PARAMETERS.find(par => par.ID === ev.ID)
+                if (param) param.expected_values = ev.expected_values
             })
         }
     }

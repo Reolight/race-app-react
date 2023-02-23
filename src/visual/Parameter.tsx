@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import parameter from "../logic/parameter";
+import { parse } from "path";
+import React, { useEffect, useState } from "react";
+import IParameter from "../logic/IParameter";
 import DropDown from "./DropDown";
 
 interface param_comp {
-    param_input?: parameter
+    param_input?: IParameter
     callback: Function
 }
 
