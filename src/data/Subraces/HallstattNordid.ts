@@ -2,6 +2,7 @@ import { arrFromRange } from "../../logic/Helpers";
 import IParameterDefinition from "../../logic/IParameterDefinition";
 import Subrace from "../../logic/Subrace";
 import { arrFromRange } from "../../logic/Helpers";
+import { arrFromRange } from "../../logic/Helpers";
 
 export const scando_nordid : Subrace = new Subrace( 
     "Скандидо-нордид",
