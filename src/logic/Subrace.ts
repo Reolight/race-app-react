@@ -154,7 +154,7 @@ export default class Subrace{
             ID: 8,
             name: 'Ширина скул',
             type: 'spinnable', 
-            values: ['Узкие', 'Средние', 'Средние']
+            values: ['Узкие', 'Средние', 'Широкие']
         },
 
         {
