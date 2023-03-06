@@ -27,7 +27,7 @@ export default function SubraceViewer(props: subraceViewerProps): JSX.Element {
                 let value = parameter.type === 'spinnable' && parameter.values && parameter.value ? 
                     parameter.values[parameter.value] :
                     parameter.value
-                return <label>{parameter.name}: {value} ({props.definedSubrace?.PARAMETERS.find(p => p.ID == parameter.ID)?.expected_values})</label>
+                return <p><label>{parameter.name}: {value} ({props.definedSubrace?.PARAMETERS.find(p => p.ID == parameter.ID)?.expected_values})</label></p>
             })}
         </div>
     )

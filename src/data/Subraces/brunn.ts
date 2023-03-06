@@ -1,4 +1,4 @@
-import IParam from "../../logic/IParam";
+import IParameterDefinition from "../../logic/IParameterDefinition";
 import Subrace from "../../logic/Subrace";
 import { arrFromRange } from "../../logic/Helpers";
 
@@ -20,6 +20,6 @@ export const brunn : Subrace = new Subrace(
         {ID: 12, expected_values: [arrFromRange (2, 17), arrFromRange (24, 29)]},
         {ID: 13, expected_values: [0, 1]}
 
-    ] as IParam[]
+    ] as IParameterDefinition[]
 )
 

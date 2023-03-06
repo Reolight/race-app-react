@@ -9,8 +9,8 @@ interface ItemCompared{
 export default function ComparedItem(props: ItemCompared){
     return (
         <div className="Panel" onClick={() => props.selected_callback(props.itemName)}>
-            <label>{props.compared.subraceOrigin.NAME}</label>
-            <progress max={100} value={props.compared.coincidence} />
+            <p><label>{props.compared.subraceOrigin.NAME}</label></p>
+            <p><progress  max={100} value={props.compared.coincidence} /></p>
         </div>
     )
 }

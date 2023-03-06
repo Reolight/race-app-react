@@ -1,4 +1,4 @@
-import IParam from "../../logic/IParam";
+import IParameterDefinition from "../../logic/IParameterDefinition";
 import Subrace from "../../logic/Subrace";
 import { arrFromRange } from "../../logic/Helpers";
 
@@ -20,6 +20,6 @@ export const north_atlantid : Subrace = new Subrace(
         {ID: 12, expected_values: arrFromRange (18, 21)},
         {ID: 13, expected_values: [0, 1, 2]}
 
-    ] as IParam[]
+    ] as IParameterDefinition[]
 )
 

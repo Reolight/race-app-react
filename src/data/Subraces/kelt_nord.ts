@@ -1,4 +1,4 @@
-import IParam from "../../logic/IParam";
+import IParameterDefinition from "../../logic/IParameterDefinition";
 import Subrace from "../../logic/Subrace";
 import { arrFromRange } from "../../logic/Helpers";
 
@@ -20,6 +20,6 @@ export const keltic_nordid : Subrace = new Subrace(
         {ID: 12, expected_values: arrFromRange (0, 21)},
         {ID: 13, expected_values: [0]}
 
-    ] as IParam[]
+    ] as IParameterDefinition[]
 )
 
