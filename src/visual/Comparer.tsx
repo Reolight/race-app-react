@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { GetData } from "../data/Data";
 import Comparator from "../logic/Comparator";
 import ICompared from "../logic/ICompared";
 import Subrace from "../logic/Subrace";
