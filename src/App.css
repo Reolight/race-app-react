@@ -114,6 +114,7 @@ body{
 
   .Panel button{
     display: flex;
+    font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     text-decoration: none;
     padding: 4px;

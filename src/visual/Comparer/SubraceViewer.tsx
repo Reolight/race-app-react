@@ -1,5 +1,5 @@
-import { CSSProperties, HTMLAttributes } from "react"
-import Comparator, { Compare } from "../../logic/Comparator"
+import { CSSProperties } from "react"
+import { Compare } from "../../logic/Comparator"
 import Subrace from "../../logic/Subrace"
 
 interface subraceViewerProps{
@@ -23,7 +23,7 @@ export default function SubraceViewer(props: subraceViewerProps): JSX.Element {
                     let value = parameter.type === 'spinnable' && parameter.values && parameter.value !== undefined ? 
                         parameter.values[parameter.value] :
                         parameter.value === undefined? "не установлен" : parameter.value
-                    return <p><label>{parameter.name}: {value}</label></p>
+                    return <p><label style={commonStyle}>{parameter.name}: {value}</label></p>
                 })}
                 <button onClick={() => props.editSubraceCallback()} >Редактировать</button>
             </div>
@@ -36,7 +36,8 @@ export default function SubraceViewer(props: subraceViewerProps): JSX.Element {
                 let value = parameter.type === 'spinnable' && parameter.values && parameter.value ? 
                     parameter.values[parameter.value] :
                     parameter.value
-                let defined_parameter = props.definedSubrace?.PARAMETERS.find(p => p.ID == parameter.ID)
+                let defined_parameter = props.definedSubrace?.PARAMETERS
+                    .find(p => p.ID === parameter.ID)
                 let description_of_defined: string | undefined = defined_parameter?.expected_values?.map(
                     expected => defined_parameter?.values !== undefined? defined_parameter.values[expected]
                                                             :  expected.toString()).join(", ")

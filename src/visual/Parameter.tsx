@@ -1,5 +1,4 @@
-import { parse } from "path";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import IParameter from "../logic/IParameter";
 import DropDown from "./DropDown";
 

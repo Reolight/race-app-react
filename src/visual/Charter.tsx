@@ -13,7 +13,7 @@ export default function Charter(props: {returnEdited: Function, editedSubrace?: 
                 props.editedSubrace
             )
         else console.log(chart)
-    }, [chart])
+    }, [chart, props.editedSubrace])
     
     function call_back(param: IParameter, e: number){
         setChart((prevState) => {

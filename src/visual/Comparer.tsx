@@ -7,7 +7,6 @@ import Charter from "./Charter";
 import ComparedItem from "./Comparer/ComparedItem";
 import SubraceViewer from "./Comparer/SubraceViewer";
 
-const data : Subrace[] = GetData()
 let comparedList : ICompared[]
 let subraceForEdit : Subrace | undefined;
 
