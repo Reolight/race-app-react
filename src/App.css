@@ -87,7 +87,15 @@ body{
     border: #282c34 1px solid;
     border-radius: 4px;
     box-shadow: #282c34 12px 12px;
-    transition: all 1s;
+    transition: all 0.5s;
+  }
+
+  .Panel.selected{
+    background: steelblue;
+    color: white;
+    border-color: black;
+    transform: translateX(4px) translateY(4px);
+    box-shadow: none;
   }
 
   .Panel input{
@@ -158,4 +166,16 @@ body{
     margin-left: auto;
     margin-right: auto;
     margin-top: 8px;
+  }
+
+  .Panel progress{
+    color: #282c34;
+  }
+
+  .Panel progress::-moz-progress-bar{
+    border: #282c34 1px solid;
+    border-radius: 4px;    
+    height: 14px;
+    box-shadow: none;
+    background: #282c34
   }

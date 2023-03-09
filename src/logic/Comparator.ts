@@ -11,7 +11,7 @@ export default function Comparator(compared: Subrace): ICompared[] {
         const params_count = defined_subrace.PARAMETERS.length;
         for (let defined_param of defined_subrace.PARAMETERS){
             let inputed_param = compared.PARAMETERS.find(param => param.ID === defined_param.ID)
-            if (!inputed_param || !inputed_param.value){
+            if (!inputed_param || inputed_param.value === undefined){
                 console.warn("Comparer: Param with ID ["+defined_param.ID+"] is absent in given subrace instance")
                 continue;
             }
@@ -26,11 +26,12 @@ export default function Comparator(compared: Subrace): ICompared[] {
         } as ICompared)
     }
 
-    return ComparedList.sort((a, b) => a.coincidence - b.coincidence)
+    return ComparedList.sort((a, b) => b.coincidence - a.coincidence)
 }
 
 export function Compare(param: IParameter, definition: IParameter): boolean{
-    if (param.value)
-        return definition.expected_vals?.includes(param.value) ?? false
+    if (param.value !== undefined){
+        return definition.expected_values?.includes(param.value) ?? false
+    }
     else return false
 }

@@ -1,3 +1,5 @@
+import { CSSProperties, HTMLAttributes } from "react"
+import Comparator, { Compare } from "../../logic/Comparator"
 import Subrace from "../../logic/Subrace"
 
 interface subraceViewerProps{
@@ -5,6 +7,13 @@ interface subraceViewerProps{
     definedSubrace?: Subrace
     editSubraceCallback: Function
 }
+
+const commonStyle : CSSProperties = {
+    fontWeight: "bold"
+}
+
+const validColor = "#33CC66"
+const invalidColor = "#ff5f5f"
 
 export default function SubraceViewer(props: subraceViewerProps): JSX.Element {
     if (props.definedSubrace === undefined){
@@ -27,7 +36,18 @@ export default function SubraceViewer(props: subraceViewerProps): JSX.Element {
                 let value = parameter.type === 'spinnable' && parameter.values && parameter.value ? 
                     parameter.values[parameter.value] :
                     parameter.value
-                return <p><label>{parameter.name}: {value} ({props.definedSubrace?.PARAMETERS.find(p => p.ID == parameter.ID)?.expected_values})</label></p>
+                let defined_parameter = props.definedSubrace?.PARAMETERS.find(p => p.ID == parameter.ID)
+                let description_of_defined: string | undefined = defined_parameter?.expected_values?.map(
+                    expected => defined_parameter?.values !== undefined? defined_parameter.values[expected]
+                                                            :  expected.toString()).join(", ")
+                let font_color: string = defined_parameter === undefined? invalidColor
+                    : Compare(parameter, defined_parameter)? validColor : invalidColor
+                return (
+                    <p>
+                        <label style={{...commonStyle, color: font_color}}>{parameter.name}: {value} </label>
+                        <br/>
+                        <label style={{...commonStyle, color: font_color}}>({description_of_defined})</label>
+                    </p>)
             })}
         </div>
     )

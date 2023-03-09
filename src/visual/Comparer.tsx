@@ -47,6 +47,7 @@ export default function Comparer() {
             
             {comparedList.map(comparedItem =>
                 <ComparedItem 
+                    isSelected={comparedItem.subraceOrigin.NAME === choosenName}
                     key={comparedItem.subraceOrigin.NAME}
                     compared={comparedItem}
                     itemName={comparedItem.subraceOrigin.NAME}
